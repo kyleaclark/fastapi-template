@@ -44,20 +44,46 @@ ___
 
 ___
 
-### Docker Build
+### Docker
 
-#### Docker Build & Run App
+#### Build & Run App
 
 ```
 docker build --target application -f Dockerfile -t fastapi-template .
 docker run --user=appuser -p 8000:8000 --env APP_ENV=DEV fastapi-template
 ```
 
-#### Docker Build & Run Tests
+#### Build & Run Tests
 
 ```
 docker build --target testing -f Dockerfile -t fastapi-template-testing .
 docker run --user=appuser --env APP_ENV=DEV fastapi-template-testing
+```
+
+### Docker Compose
+
+#### Build & Run App (local dev)
+
+```
+docker-compose -f conf/docker/image.service.yaml build
+docker-compose -f conf/docker/service.local.dev.yaml up
+docker-compose -f conf/docker/service.local.dev.yaml down
+```
+
+#### Build & Run App (local dev)
+
+```
+docker-compose -f conf/docker/image.service.yaml build
+docker-compose -f conf/docker/service.deployed.dev.yaml up
+docker-compose -f conf/docker/service.deployed.dev.yaml down
+```
+
+#### Build & Run Tests (local dev)
+
+```
+docker-compose -f conf/docker/image.service.yaml build
+docker-compose -f conf/docker/testing.local.dev.yaml up
+docker-compose -f conf/docker/testing.local.dev.yaml down
 ```
 
 ___

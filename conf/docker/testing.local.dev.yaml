@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  fastapi-template-testing:
+    image: fastapi-template-testing
+    container_name: fastapitemplate-testing-dev
+    command: ["/app/test_runner.sh"]
+    environment:
+    - APP_ENV=DEV
+    - DEPLOYED_FLAG=False

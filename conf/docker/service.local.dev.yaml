@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  fastapi-template:
+    image: fastapi-template
+    container_name: fastapitemplate-local-dev
+    command: ["/app/start.sh"]
+    environment:
+    - APP_ENV=DEV
+    - DEPLOYED_FLAG=False
+    ports:
+      - "8000:8000"
