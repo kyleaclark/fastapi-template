@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  fastapi-template:
+    build:
+      context: ../../
+      dockerfile: ./Dockerfile
+      target: testing
+    image: fastapi-template-testing

@@ -26,7 +26,7 @@ class AppConfig:
     def _init(cls):
         app_start_datetime_utc = dt.datetime.utcnow().isoformat()
         app_env = os.getenv('APP_ENV', 'dev').lower()
-        deployed_flag = bool(os.getenv('DEPLOYED_FLAG', False))
+        deployed_flag = cls._convert_bool_os_env_var('DEPLOYED_FLAG', default_value=False)
 
         cls._init_logging(app_env, deployed_flag)
 
@@ -44,6 +44,17 @@ class AppConfig:
             StructuredConsoleHandleParams(**log_settings) if deployed_flag else ConsoleHandleParams(**log_settings))
 
         initialize_root_logger(handler_params)
+
+    @staticmethod
+    def _convert_bool_os_env_var(env_var_name: str, default_value: bool) -> bool:
+        env_var_value = os.getenv(env_var_name, default_value)
+
+        if env_var_value and isinstance(env_var_value, str):
+            result = True if env_var_value.lower() == 'true' else False
+        else:
+            result = env_var_value
+
+        return result
 
 
 # Global singleton instance of AppConfig
